@@ -1,0 +1,177 @@
+#define SW1 1
+#define SW2 2
+#define SW3 3
+#define LED1 4
+#define LED2 5
+#define LED3 6
+#define LED4 7
+#define LED5 8
+#define LED6 9
+#define LED7 10
+#define LED8 11
+#define LED9 12
+#define LED10 13
+int ciclo=0;
+int leds[10]={LED1,LED2,LED3,LED4,LED5,LED6,LED7,LED8,LED9,LED10};
+int contador=0;
+
+int contador1=1;
+int sw1,sw2,sw3;
+void setup() 
+{
+      pinMode(SW1, INPUT);
+      pinMode(SW2, INPUT);
+      pinMode(SW3, INPUT);
+      pinMode(LED1, OUTPUT);
+      pinMode(LED2, OUTPUT);
+      pinMode(LED3, OUTPUT);
+      pinMode(LED4, OUTPUT);
+      pinMode(LED5, OUTPUT);
+      pinMode(LED6, OUTPUT);
+      pinMode(LED7, OUTPUT);
+      pinMode(LED8, OUTPUT);
+      pinMode(LED9, OUTPUT);
+      pinMode(LED10, OUTPUT);
+      pinMode(LED6, OUTPUT);
+
+}
+
+void loop() 
+{
+      sw1=digitalRead(SW1);
+      sw2=digitalRead(SW2);
+      sw3=digitalRead(SW3);   
+      
+      if(sw1==LOW)
+      {
+        //función no asignada 0 0 0
+        if(sw2==LOW&&sw3==LOW)
+        {
+            libre();
+        }
+        //funciòn no asignada 0 0 1 
+        if(sw2==LOW&&sw3==HIGH)
+        {
+            libre();
+        }
+        //función leds pares 0 1 0
+        if(sw2==HIGH&&sw3==LOW)
+        {
+            pares();
+        }
+        //funciòn leds impares 0 1 1 
+        if(sw2==HIGH&&sw3==HIGH)
+        {
+            impares();
+        }
+      }
+      else
+      {
+        
+        //función libre 1 0 0
+        if(sw2==LOW&&sw3==LOW)
+        {
+            libre();
+        }
+        //función leds aleatorios 1 0 1
+        if(sw2==LOW&&sw3==HIGH)
+        {
+            aleatorio();
+        }
+        //función leds pares ordenados 1 1 0
+        if(sw2==HIGH&&sw3==LOW)
+        {
+            parordenado();
+        }
+        //función leds pares ordenados 1 1 1
+        if(sw2==HIGH&&sw3==HIGH)
+        {
+           
+            while(ciclo<2)
+            {
+              juego1(); 
+             ciclo++; 
+            }
+         }
+       }
+}
+
+//FUNCIONES NO ASIGNADAS 
+void libre()
+{
+      for(int a=0;a<11;a++)
+          {
+            digitalWrite(leds[a],LOW);
+          }
+}
+
+void  juego1()
+{
+    for(contador=0;contador<11;contador++)
+   {
+        digitalWrite(leds[contador],HIGH);
+        delay(90);
+        digitalWrite(leds[contador],LOW);
+        delay(90);
+   }
+ }  
+  
+
+//funcion leds pares 
+void pares()
+{
+   for(;contador1<11;contador1++)
+   {
+        digitalWrite(leds[contador1],HIGH);
+        delay(200);
+        digitalWrite(leds[contador1],LOW);
+        delay(200);
+        contador1++;
+   }
+   contador1=1;
+}
+
+//funcion leds impares 
+void impares()
+{
+   for(int contador2=0;contador2<11;contador2++)
+   {
+        digitalWrite(leds[contador2],HIGH);
+        delay(200);
+        digitalWrite(leds[contador2],LOW);
+        delay(200);
+        contador2++;
+   }
+}
+
+//funcion leds random  
+void aleatorio()
+{
+   int aleatorio;
+   for(int b=0;b<11;b++)
+   {
+        aleatorio=random(10);
+        digitalWrite(leds[aleatorio],HIGH);
+        delay(200);
+        digitalWrite(leds[aleatorio],LOW);
+        delay(200);
+        
+   }
+}
+
+
+//funcion leds PARES ALTERNOS (10,1)  
+void parordenado()
+{
+   int aleatorio;
+   for(int b=0;b<11;b++)
+   {
+        aleatorio=9;
+        digitalWrite(leds[b],HIGH);
+        digitalWrite(leds[aleatorio-b],HIGH);
+        delay(100);
+        digitalWrite(leds[b],LOW);
+        digitalWrite(leds[aleatorio-b],LOW);
+        delay(100);
+     }
+}
