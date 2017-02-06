@@ -1,0 +1,184 @@
+PImage Fon;
+PImage Jt;
+PImage Log;
+PImage Ps;
+ 
+PImage Imgl1;
+PImage Imgl2;
+PImage Imgd1;
+PImage Imgd2;
+PImage SaltI;
+PImage SalI;
+PImage LanI;
+PImage LanD;
+ 
+PImage Bal;
+PImage Bal1;
+PImage Bal2;
+PImage Piso;
+PImage Mpa;
+PImage Flo;
+PImage Over;
+PImage Des;
+PImage Win;
+PImage Win2;
+PImage Toa;
+PImage Nuv;
+PImage Hmar;
+PImage Cbos;
+PImage Lui;
+PImage Lui1;
+PImage Lui2;
+PImage Text;
+PImage Text2;
+PImage Text3;
+PImage Text4;
+PImage TexC;
+PImage TexV;
+PImage TexA;
+PImage Tec;
+ 
+PImage Dan;
+PImage FDan;
+PImage FDan1;
+PImage FDan2;
+ 
+PImage Exp;
+PImage Fal;
+PImage Fal1;
+PImage Bow;
+PImage Bow2;
+PImage Bob;
+PImage Fue;
+PImage Boc;
+PImage Boc1;
+ 
+int Balx = -10;
+int Baly = -10;
+ 
+int x1 = 270;
+int y2 = 0;
+int xs = 305;
+int y = 460;
+int X = 0;
+int Zx = 0;
+int Za = 0;
+int XX = 0;
+float N = 0;
+float M = 0;
+ 
+int Start = 0;
+int Pos = 5;
+int Salt = 0;
+int Punt = 10;
+int Fallos = 3;
+int F = 0;
+int F1 = 0;
+int K = 0;
+int G = 0;
+int S = 0;
+int S1 = 0;
+int J = 0;
+int J1 = 10;
+ 
+float AtaCx = 0;
+float AtaCy = 0;
+float Fuex = 500;
+float Fuey = -10;
+ 
+boolean Acer1 = false;
+boolean Acer2 = false;
+boolean Acer3 = false;
+Mario myMario;
+ 
+void setup() 
+{
+ size(700, 600);
+ smooth();
+ noStroke();
+ Piso = loadImage("Piso.png");
+ Imgl1 = loadImage("Img1.png");
+  Imgl2 = loadImage("Img2.png");
+  Imgd1 = loadImage("Img11.png");
+  Imgd2 = loadImage("Img22.png");
+  SaltI = loadImage("Salt.png");
+  SalI = loadImage("Salt1.png");
+  LanD = loadImage("LanD.png");
+  LanI = loadImage("LanI.png");
+ myMario =new Mario(0,500); 
+}
+ 
+void draw() 
+{
+  background(0);   
+   myMario.display();
+   myMario.move();
+}
+ 
+ //teclado 
+//KEYBOARD INPUT
+ 
+void keyPressed() {
+  if (key == CODED) {
+     if (keyCode == LEFT) {
+       myMario.moveLeft = true;
+       Imgl1 = loadImage("Img1.png");
+ 
+     } else if(keyCode == RIGHT) {
+       myMario.moveRight = true;
+       Imgl1 = loadImage("Img22.png");
+     } else if(keyCode == UP) {
+        Imgl1 = loadImage("Salt1.png");
+       myMario.moveUp = true;
+      
+     }
+  }
+}
+ 
+void keyReleased() {
+  if (key == CODED) {
+     if (keyCode == LEFT) {
+       myMario.moveLeft = false;
+        Imgl1 = loadImage("Img2.png");
+     } else if(keyCode == RIGHT) {
+       myMario.moveRight = false;
+       Imgl1 = loadImage("Img11.png");
+     } else if(keyCode == UP) {
+        Imgl1 = loadImage("Salt1.png");
+       myMario.moveUp = false;
+       myMario.moveDown = true;
+     }
+  }
+}
+ 
+//PLAYER CLASS
+ 
+class Mario {
+  float xPos;
+  float yPos;
+  float speed = 2;
+  boolean moveLeft, moveRight, moveUp, moveDown = false;
+ 
+  Mario(float x_in, float y_in) {
+    xPos = x_in;
+    yPos = y_in; 
+  }
+ 
+  void display() {
+    fill(255);
+    noStroke();
+    image(Piso,0,0,700,600);
+    image(Imgl1, xPos, yPos);
+    //Imgl1.resize(50,60);
+  }
+ 
+  void move() {
+    if(moveLeft) xPos -= speed;
+    if(moveRight) xPos += speed;
+    if(moveUp) yPos -= speed*3;
+    if(moveDown) yPos += speed*2;
+    if (yPos >= 500) {
+    moveDown = false;
+    }  
+  }
+  }
